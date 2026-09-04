@@ -9,6 +9,9 @@ wheels/
 # Virtual environments
 .venv
 
+.mypy_cache/
+.vscode/
+
 # Keys and secrets
 .env
 
@@ -19,3 +22,5 @@ data/
 frontend/node_modules/
 frontend/dist/
 frontend/.vite/
+
+.DS_Store
