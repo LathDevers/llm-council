@@ -5,9 +5,17 @@
 echo "Starting LLM Council..."
 echo ""
 
+VENV_PYTHON="backend/.venv/bin/python"
+
+if [ ! -x "$VENV_PYTHON" ]; then
+    echo "No virtualenv found at backend/.venv"
+    echo "Create it with: python3 -m venv backend/.venv && backend/.venv/bin/pip install -r requirements.txt"
+    exit 1
+fi
+
 # Start backend
 echo "Starting backend on http://localhost:8001..."
-uv run python -m backend.main &
+"$VENV_PYTHON" -m backend.main &
 BACKEND_PID=$!
 
 # Wait a bit for backend to start

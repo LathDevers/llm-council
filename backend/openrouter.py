@@ -39,8 +39,18 @@ async def query_model(model: str, messages: list[dict[str, str]], timeout: float
 
             return {"content": message.get("content"), "reasoning_details": message.get("reasoning_details")}
 
+    except httpx.HTTPStatusError as e:
+        # OpenRouter puts the real reason in the body; the status line alone is useless for debugging.
+        detail = e.response.text
+        try:
+            detail = e.response.json()["error"]["message"]
+        except Exception:
+            pass
+        print(f"Error querying model {model}: HTTP {e.response.status_code} - {detail}")
+        return None
+
     except Exception as e:
-        print(f"Error querying model {model}: {e}")
+        print(f"Error querying model {model}: {type(e).__name__}: {e}")
         return None
 
 

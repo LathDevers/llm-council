@@ -114,6 +114,9 @@ This strict format allows reliable parsing while still getting thoughtful evalua
 ### Relative Imports
 All backend modules use relative imports (e.g., `from .config import ...`) not absolute imports. This is critical for Python's module system to work correctly when running as `python -m backend.main`.
 
+### Python Environment
+The backend runs from a plain virtualenv at `backend/.venv` (not uv). Dependencies are pinned loosely in `requirements.txt` at the project root. Always invoke the interpreter explicitly from the project root: `backend/.venv/bin/python -m backend.main` — the working directory has to be the root for the relative imports and `data/` paths to resolve.
+
 ### Port Configuration
 - Backend: 8001 (changed from 8000 to avoid conflict)
 - Frontend: 5173 (Vite default)
@@ -127,7 +130,7 @@ Models are hardcoded in `backend/config.py`. Chairman can be same or different f
 
 ## Common Gotchas
 
-1. **Module Import Errors**: Always run backend as `python -m backend.main` from project root, not from backend directory
+1. **Module Import Errors**: Always run backend as `backend/.venv/bin/python -m backend.main` from project root, not from the backend directory
 2. **CORS Issues**: Frontend must match allowed origins in `main.py` CORS middleware
 3. **Ranking Parse Failures**: If models don't follow format, fallback regex extracts any "Response X" patterns in order
 4. **Missing Metadata**: Metadata is ephemeral (not persisted), only available in API responses
