@@ -16,8 +16,8 @@ COUNCIL_MODELS = [
     "google/gemini-3-pro-preview",
     "google/gemini-3.8-flash",
     # Anthropic
-    "anthropic/claude-fable-5.1", # $$$
-    "anthropic/claude-opus-5", # $$$
+    #"anthropic/claude-fable-5.1", # $$$
+    #"anthropic/claude-opus-5", # $$$
     "anthropic/claude-opus-4.8",
     "anthropic/claude-sonnet-5",
     # Grok
